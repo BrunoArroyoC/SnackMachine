@@ -7,10 +7,12 @@ public class test {
         Snacks s2 = new Snacks("Papas", 21.43,20);
 
         SnackMachine m1 = new SnackMachine();
-        m1.addSnack(s1);
-        m1.addSnack(s2);
 
+        m1.addStock(s1);
+        m1.addStock(s2);
 
         m1.showStock();
+
+
     }
 }

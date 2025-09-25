@@ -13,7 +13,7 @@ public class Snacks {
         this.name=name;
         this.price=price;
         this.countSnack = countSnack;
-        this.id = generateId();
+        this.id = UUID.randomUUID().toString();
 
     }
 
@@ -47,13 +47,20 @@ public class Snacks {
 
     @Override
     public String toString(){
-        return String.format("%-15s %-15.2f %-15d", this.name, this.price,this.countSnack);
+        String shortId = id.length() > 8 ? id.substring(0, 8) : id;
+        return String.format("%-15s %-10.2f %-10s %-5d", name, price, shortId, countSnack);
     }
 
     @Override
     public boolean equals(Object o){
-        Snacks snacks = (Snacks) o;
-        return this.id.equals(snacks.getId());
+        if(this == o){
+            return true;
+        }
+        if(o == null || getClass() != o.getClass()){
+            return false;
+        }
+        Snacks otherSnack = (Snacks) o;
+        return this.id.equals(otherSnack.getId());
     }
 
     @Override
@@ -61,7 +68,8 @@ public class Snacks {
         return Objects.hash(id);
     }
 
-    public String generateId (){
-        return id = UUID.randomUUID().toString();
+    public void reduceCount(){
+        this.countSnack --;
     }
+
 }
