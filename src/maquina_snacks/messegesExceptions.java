@@ -12,13 +12,7 @@ interface messegesExceptions {
     default void notFoundSnack(){
         System.out.println("Sorry, we can not found the snack");
     }
-    default void menu(){
-        System.out.println("""
-                1. Buy Snack
-                2. Show Ticket
-                3. Add Snack
-                4. Exit
-                """);
-    }
+
+
 
 }

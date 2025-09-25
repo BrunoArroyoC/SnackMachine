@@ -11,7 +11,9 @@ public class test {
         m1.addStock(s1);
         m1.addStock(s2);
 
-        m1.showStock();
+        MenuInteraction menu = new MenuInteraction();
+        menu.menuInteraction();
+
 
 
     }

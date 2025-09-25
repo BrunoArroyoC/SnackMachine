@@ -20,6 +20,7 @@ public class SnackMachine implements messegesExceptions {
     }
 
     public Snacks removeStock(String id){
+
         if(stock.isEmpty()){
             showNoSnack();
             return null;
@@ -28,6 +29,9 @@ public class SnackMachine implements messegesExceptions {
             notFoundSnack();
             return null;
         }
+
+        showStock();
+        System.out.println();
 
         Snacks snack = stock.get(id);
         stock.remove(id);
@@ -56,6 +60,8 @@ public class SnackMachine implements messegesExceptions {
             showNoSnack();
             return;
         }
+
+        System.out.println();
         Snacks snack = stock.get(id);
         if(!stock.containsKey(id)){
             notFoundSnack();
@@ -68,12 +74,12 @@ public class SnackMachine implements messegesExceptions {
             return;
         }
         if(snack.getCountSnack()<= 0){
+            stock.remove(snack.getId());
             System.out.println("Sorry this snack is out of stock");
             return;
         }
         System.out.println("Your total is: $"+snack.getPrice());
         snack.reduceCount();
-
         while (true) {
             try {
                 System.out.print("Do you need the ticker YES/NO:  ");
@@ -91,6 +97,8 @@ public class SnackMachine implements messegesExceptions {
             }
         }
     }
+
+
 
 
 
