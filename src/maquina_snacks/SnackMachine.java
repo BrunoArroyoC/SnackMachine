@@ -69,11 +69,6 @@ public class SnackMachine implements messegesExceptions {
             return;
         }
 
-
-        if(snack == null) {
-            notFoundSnack();
-            return;
-        }
         if(snack.getCountSnack()<= 0){
             stock.remove(snack.getId());
             System.out.println("Sorry this snack is out of stock");
