@@ -24,9 +24,14 @@ public class SnackMachine implements messegesExceptions {
             showNoSnack();
             return null;
         }
+        if(!stock.containsKey(id)){
+            notFoundSnack();
+            return null;
+        }
+
         Snacks snack = stock.get(id);
         stock.remove(id);
-        System.out.println("Snack eliminated");   //Todavia falta que pasaria si no se encunetra el id
+        System.out.println("Snack eliminated");
         return snack;
 
     }
@@ -36,34 +41,51 @@ public class SnackMachine implements messegesExceptions {
             showNoSnack();
             return null;
         }
+        if(!stock.containsKey(id)){
+            notFoundSnack();
+            return "";
+        }
+
         Snacks s = stock.get(id);
-        System.out.println("Snack found it"); //Todavia falta que pasaria si no se encunetra el id
+        System.out.println("Snack found it");
         return s.toString();
     }
 
     public void buySnack(String id){
         if(stock.isEmpty()){
             showNoSnack();
+            return;
         }
         Snacks snack = stock.get(id);
-        if(snack == null){
-            notFoundSnack();   //Todavia falta que pasaria si no se encunetra el id
-        }else{
-            System.out.println("El total es de: " + snack.getPrice());
-            snack.reduceCount();
+        if(!stock.containsKey(id)){
+            notFoundSnack();
+            return;
         }
-        while (snack != null) {
+
+
+        if(snack == null) {
+            notFoundSnack();
+            return;
+        }
+        if(snack.getCountSnack()<= 0){
+            System.out.println("Sorry this snack is out of stock");
+            return;
+        }
+        System.out.println("Your total is: $"+snack.getPrice());
+        snack.reduceCount();
+
+        while (true) {
             try {
-                System.out.println("Le gustaria el ticket? ");
+                System.out.print("Do you need the ticker YES/NO:  ");
                 String op = sc.nextLine().toUpperCase().trim();
-                if (op.equals("SI")) {
+                if (op.equals("YES")) {
                     snack.toString();
                     break;
                 } else {
                     System.out.println("Thank you for you purchase");
                     break;
                 }
-            }catch (IllegalArgumentException e){
+            }catch (Exception e){
                 System.out.println("Wrong option. Try again");
                 sc.nextLine();
             }
