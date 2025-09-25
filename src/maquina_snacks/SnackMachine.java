@@ -63,6 +63,7 @@ public class SnackMachine implements messegesExceptions {
 
         System.out.println();
         Snacks snack = stock.get(id);
+
         if(!stock.containsKey(id)){
             notFoundSnack();
             return;
@@ -85,9 +86,9 @@ public class SnackMachine implements messegesExceptions {
                 System.out.print("Do you need the ticker YES/NO:  ");
                 String op = sc.nextLine().toUpperCase().trim();
                 if (op.equals("YES")) {
-                    snack.toString();
+                    System.out.println(snack.getName() + " " + snack.getPrice());
                     break;
-                } else {
+                } else if (op.equals("NO")){
                     System.out.println("Thank you for you purchase");
                     break;
                 }

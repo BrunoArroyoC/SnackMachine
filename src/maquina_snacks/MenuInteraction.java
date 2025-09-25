@@ -1,18 +1,17 @@
 package maquina_snacks;
-import java.sql.SQLOutput;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class MenuInteraction implements messegesExceptions {
-    private final SnackMachine snackMachine;
     final Scanner sc;
     public MenuInteraction (){
-        this.snackMachine = new SnackMachine();
         sc = new Scanner(System.in);
     }
 
 
 
-    public void menuInteraction(){
-        while(true){
+    public void menuInteraction(SnackMachine snackMachine){
+        int option = 0;
+        while(option != 4){
 
             System.out.println("""
                     \t ===Snack Machine === 
@@ -20,52 +19,45 @@ public class MenuInteraction implements messegesExceptions {
                     \t 2. Buy Snacks
                     \t 3. Find Snacks
                     \t 4. Exit
-                    """);
-            int option = sc.nextInt();
-            sc.nextLine();
+                    \n""");
+            do {
+                try {
+                    System.out.print("Choose the option: ");
+                    System.out.println();
+                    option = sc.nextInt();
+                    sc.nextLine();
+                    break;
+                }catch (InputMismatchException e){
+                    incorrectOption();
+                    sc.nextLine();
+                }
+            }while(true);
 
             switch (option){
                 case 1:
-                    this.snackMachine.showStock();
+                    snackMachine.showStock();
                 break;
                 case 2:
-                    do{
-                        try {
-                            this.snackMachine.showStock();
-                            System.out.print("Type the snack ID:  ");
-                            String idAux = sc.nextLine();
-                            this.snackMachine.buySnack(idAux);
-                            break;
-                        }catch (Exception e){
-                            notFoundSnack();
-                            sc.nextLine();
-                        }
-                    }while (true);
+                    snackMachine.showStock();
+                    System.out.print("Type the snack ID:  ");
+                    String idAux = sc.nextLine();
+                    snackMachine.buySnack(idAux);
+                    break;
                 case 3:
-                    do{
-                        try {
-                            this.snackMachine.showStock();
-                            System.out.print("Type the snack ID:  ");
-                            String idAux2 = sc.nextLine();
-                            this.snackMachine.findStock(idAux2);
-                            break;
-                        }catch (Exception e){
-                            notFoundSnack();
-                            sc.nextLine();
-                        }
-                    }while (true);
+                    snackMachine.showStock();
+                    System.out.print("Type the snack ID:  ");
+                    String idAux2 = sc.nextLine();
+                    snackMachine.findStock(idAux2);
+                    break;
+
+
                 case 4:
                     System.out.println("Exit ...");
+                break;
 
             }
 
         }
     }
-
-
-
-
-
-
 
 }

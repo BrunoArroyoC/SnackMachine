@@ -12,7 +12,7 @@ public class test {
         m1.addStock(s2);
 
         MenuInteraction menu = new MenuInteraction();
-        menu.menuInteraction();
+        menu.menuInteraction(m1);
 
 
 

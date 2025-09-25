@@ -12,6 +12,9 @@ interface messegesExceptions {
     default void notFoundSnack(){
         System.out.println("Sorry, we can not found the snack");
     }
+    default void incorrectOption(){
+        System.out.println("Incorrect Option, try again");
+    }
 
 
 

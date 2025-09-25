@@ -1,6 +1,7 @@
 package maquina_snacks;
 
 import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
 
 public class Snacks {
@@ -13,7 +14,7 @@ public class Snacks {
         this.name=name;
         this.price=price;
         this.countSnack = countSnack;
-        this.id = UUID.randomUUID().toString();
+        this.id = generationID();
 
     }
 
@@ -70,6 +71,14 @@ public class Snacks {
 
     public void reduceCount(){
         this.countSnack --;
+    }
+
+
+    public String generationID (){
+        Random rd = new Random();
+        int aux = 10000000 + rd.nextInt(90000000);
+        String identificator = Integer.toString(aux);
+        return identificator;
     }
 
 }
