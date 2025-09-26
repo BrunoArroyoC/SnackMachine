@@ -1,4 +1,6 @@
-package maquina_snacks;
+package interaction;
+import maquina_snacks.SnackMachine;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class MenuInteraction implements messegesExceptions {

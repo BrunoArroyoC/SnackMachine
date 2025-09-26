@@ -1,4 +1,12 @@
 package maquina_snacks;
+import domain.Snacks;
+import interaction.messegesExceptions;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+
 import java.util.Scanner;
 import java.util.HashMap;
 
@@ -82,6 +90,29 @@ public class SnackMachine implements messegesExceptions {
                 String op = sc.nextLine().toUpperCase().trim();
                 if (op.equals("YES")) {
                     System.out.println(snack.getName() + " " + snack.getPrice());
+                    try{
+                        File ticket = new File("ticket");
+                        if(ticket.createNewFile()){
+                            System.out.println("The ticket is already created: " + ticket.getName());
+                        }else{
+                            System.out.println("Error. The ticked already exist");
+                        }
+                    }catch (IOException e){
+                        System.out.println("The ticket is already recived" + e.getMessage());
+                    }
+                    try{
+                        BufferedWriter bw = new BufferedWriter(new FileWriter("ticket",false));
+                        bw.write("===Ticket===\n");
+                        bw.write(snack.getName() + " " + snack.getPrice());
+                        bw.newLine();
+                        bw.write("Thank you for your purchase");
+
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+
+
+
                     break;
                 } else if (op.equals("NO")){
                     System.out.println("Thank you for you purchase");

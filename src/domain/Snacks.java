@@ -1,8 +1,7 @@
-package maquina_snacks;
+package domain;
 
 import java.util.Objects;
 import java.util.Random;
-import java.util.UUID;
 
 public class Snacks {
     private String name;

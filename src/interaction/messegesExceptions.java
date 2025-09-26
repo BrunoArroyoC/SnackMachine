@@ -1,6 +1,6 @@
-package maquina_snacks;
+package interaction;
 
-interface messegesExceptions {
+public interface messegesExceptions {
 
     default void showNoSnack(){
         System.out.println("Error, there is not any snack.");

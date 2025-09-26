@@ -1,5 +1,8 @@
 package maquina_snacks;
 
+import domain.Snacks;
+import interaction.MenuInteraction;
+
 public class test {
     public static void main(String[] args) {
 
