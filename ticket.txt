@@ -1,0 +1,4 @@
+=== Ticket ===
+Date: 2025-09-26T15:37:47.790033700
+Snack: Papas
+Price: 21.43

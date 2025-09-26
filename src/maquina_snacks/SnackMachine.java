@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.HashMap;
 
@@ -84,46 +85,40 @@ public class SnackMachine implements messegesExceptions {
         }
         System.out.println("Your total is: $"+snack.getPrice());
         snack.reduceCount();
+        askForTicket(snack);
+    }
+
+    public void askForTicket(Snacks snack){
         while (true) {
-            try {
-                System.out.print("Do you need the ticker YES/NO:  ");
-                String op = sc.nextLine().toUpperCase().trim();
-                if (op.equals("YES")) {
-                    System.out.println(snack.getName() + " " + snack.getPrice());
-                    try{
-                        File ticket = new File("ticket");
-                        if(ticket.createNewFile()){
-                            System.out.println("The ticket is already created: " + ticket.getName());
-                        }else{
-                            System.out.println("Error. The ticked already exist");
-                        }
-                    }catch (IOException e){
-                        System.out.println("The ticket is already recived" + e.getMessage());
-                    }
-                    try{
-                        BufferedWriter bw = new BufferedWriter(new FileWriter("ticket",false));
-                        bw.write("===Ticket===\n");
-                        bw.write(snack.getName() + " " + snack.getPrice());
-                        bw.newLine();
-                        bw.write("Thank you for your purchase");
-
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
-
-
-
-                    break;
-                } else if (op.equals("NO")){
-                    System.out.println("Thank you for you purchase");
-                    break;
-                }
-            }catch (Exception e){
-                System.out.println("Wrong option. Try again");
-                sc.nextLine();
+            System.out.print("Do you need the ticket YES/NO:  ");
+            String op = sc.nextLine().toUpperCase().trim();
+            if (op.equals("YES")) {
+                generateTicketFile(snack);
+                break;
+            } else if (op.equals("NO")){
+                System.out.println("Thank you for you purchase");
+                break;
+            }else{
+                System.out.println("ERROR. Try again option YES/NO");
             }
+
         }
     }
+
+    public void generateTicketFile(Snacks snack){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("ticket.txt",false))){
+            bw.write("=== Ticket ===");
+            bw.newLine();
+            bw.write("Date: " + LocalDateTime.now());
+            bw.newLine();
+            bw.write("Snack: " + snack.getName());
+            bw.newLine();
+            bw.write("Price: " + snack.getPrice());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
 
 
 
